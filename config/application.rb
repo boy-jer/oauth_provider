@@ -6,6 +6,8 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
+require 'oauth/rack/oauth_filter'
+
 # # require "rails/test_unit/railtie"
 
 if defined?(Bundler)
@@ -20,8 +22,11 @@ module OauthProvider
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      g.view_specs false
-      g.helper_specs false
+      g.orm             :mongoid
+      g.template_engine :haml
+      g.test_framework  :rspec
+      g.view_specs      false
+      g.helper_specs    false
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -57,5 +62,7 @@ module OauthProvider
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.middleware.use OAuth::Rack::OAuthFilter
   end
 end
