@@ -10,6 +10,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "oauth"
 gem "oauth-plugin", ">= 0.4.0.rc2"
 
 gem 'jquery-rails'
